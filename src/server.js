@@ -17,4 +17,15 @@ server.use('/api/v1', recipeRouter)
 
 
 const PORT = 3001
-server.listen(PORT, () => {console.log("Server online at port "+PORT)})
+
+
+const AppDataSource = require("./repository/dbSource.ts").AppDataSource
+
+AppDataSource
+    .initialize()
+    .then(() => {
+        server.listen(PORT, () => {
+            console.log("Server online at port "+PORT)
+        })
+    })
+

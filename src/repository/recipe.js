@@ -1,14 +1,18 @@
+
+
 require('dotenv').config({path:__dirname+"/.env"})
-const query = require('../utils/db_connection')
-  
+
+const { AppDataSource } = require("./dbSource.ts")
+
 
 const list = async (limit, page, sortBy) => {
-    let q = await query('SELECT * FROM Ingredienti')
-    return q
+    let rep = AppDataSource.getRepository("Ricetta")
+    return await rep.find()
 }
 
 const id = async (id) => {
-    return await query(`SELECT * FROM Ingredienti WHERE IdI = ${id}`)
+    let rep = AppDataSource.getRepository("Ricetta")
+    return await rep.findOneBy({id: id})
 }
 
 module.exports = {
