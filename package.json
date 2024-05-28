@@ -16,6 +16,6 @@
   },
   "scripts": {
     "dev": "npm i && nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "npx ts-node ./src/server.js"
   }
 }

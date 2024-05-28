@@ -20,4 +20,6 @@ router.get('/recipes', validate(recipeValidator.list), recipeController.list)
 // ":id" rappresenta un "parametro" dell'indirizzo, lo troviamo in req.params
 router.get('/recipes/:id', validate(recipeValidator.byId), recipeController.ingredientId)
 
+router.post('/recipes', validate(recipeValidator.post), recipeController.post)
+
 module.exports = router

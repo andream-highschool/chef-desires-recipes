@@ -1,24 +1,6 @@
 const Joi = require('joi')
 
 
-// Esempio di oggetto accettato da questo validate
-// {
-//     query: {
-//     sortBy: 'name',
-//     limit: 20,
-//     page: 3
-//     }
-// }
-
-// Esempio di oggetto NON accettato da questo validate
-// {
-//     query: {
-//     sortBy: 'name',
-//     limit: '20',
-//     page: true
-//     }
-// }
-
 const list = {
     query: Joi.object().keys({
         sortBy: Joi.string(),
@@ -33,6 +15,10 @@ const byId = {
     }),
 }
 
+const post = {
+    
+}
+
 module.exports = {
-    list, byId
+    list, byId, post
 }

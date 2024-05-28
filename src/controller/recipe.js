@@ -17,8 +17,16 @@ const ingredientId = (req,res) => {
     })
 }
 
-module.exports = {
-    list, ingredientId
+const post = (req, res) => {
+
+    recipeRepository.post(req)
+    .then(() => {
+        res.status(httpStatus.CREATED)
+        res.end()
+    })
 }
 
-// 
+
+module.exports = {
+    list, ingredientId, post
+}

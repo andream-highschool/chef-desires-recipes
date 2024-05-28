@@ -1,5 +1,3 @@
-
-
 require('dotenv').config({path:__dirname+"/.env"})
 
 const { AppDataSource } = require("./dbSource.ts")
@@ -15,7 +13,15 @@ const id = async (id) => {
     return await rep.findOneBy({id: id})
 }
 
+const post = async (recipe) => {
+    let rep = AppDataSource.getRepository("Ricetta")
+    console.log(recipe)
+    console.log("ok")
+    
+}
+
 module.exports = {
     list,
-    id
+    id,
+    post
 }
