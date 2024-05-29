@@ -16,7 +16,11 @@ const byId = {
 }
 
 const post = {
-    
+    body: Joi.object().keys({
+        recipe: Joi.object().keys({
+            nome: Joi.string()
+        })
+    })
 }
 
 module.exports = {

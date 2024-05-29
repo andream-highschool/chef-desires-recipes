@@ -1,6 +1,7 @@
-require('dotenv').config({path:__dirname+"/.env"})
+import { Ricetta } from "./entities/Ricetta"
+import { AppDataSource } from "./dbSource"
 
-const { AppDataSource } = require("./dbSource.ts")
+require('dotenv').config({path:__dirname+"/.env"})
 
 
 const list = async (limit, page, sortBy) => {
@@ -15,9 +16,12 @@ const id = async (id) => {
 
 const post = async (recipe) => {
     let rep = AppDataSource.getRepository("Ricetta")
-    console.log(recipe)
-    console.log("ok")
     
+    let ricetta = new Ricetta()
+    ricetta.nome = recipe.nome
+    await rep.save(ricetta)
+    
+    return ricetta;
 }
 
 module.exports = {

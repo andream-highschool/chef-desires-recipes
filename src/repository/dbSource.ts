@@ -3,7 +3,7 @@ import { DataSource } from "typeorm"
 export const AppDataSource = new DataSource({
     type: "mssql",
     host: "localhost",
-    port: 63122,
+    port: 5533,
     username: "sa",
     password: "1AAAaaa!",
     database: "Test",

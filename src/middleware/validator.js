@@ -10,6 +10,7 @@ const validate = (schema) => (req, res, next) => {
     let chiavi = Object.keys(validSchema)
     const object = pick(req, chiavi); // Ora prendo dalla richiesta solo i parametri trovati nello schema JOI 
     
+
     const { value, error } = Joi.compile(validSchema)
         .prefs({ errors: { label: 'key' }, abortEarly: false })
         .validate(object);
@@ -23,7 +24,7 @@ const validate = (schema) => (req, res, next) => {
 
                                                                                                                                                 // Lo commento perché sembra non fare nulla, req rimane sempre quello quindi ho aggiunto 
                                                                                                                                                 // "const query = req.query" in "..\controller\recipe.js"
-    Object.assign(req, value)
+    req.validatedResult = value;
     
     return next();
 };

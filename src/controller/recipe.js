@@ -2,6 +2,8 @@ const httpStatus = require("http-status");
 const recipeRepository = require('../repository/recipe')
 
 const list = (req, res) => {
+    req = req.validatedResult;
+    
     const query = req.query
     recipeRepository.list(query.limit, query.page)
     .then((recipes) => {
@@ -10,6 +12,8 @@ const list = (req, res) => {
 }
 
 const ingredientId = (req,res) => {
+    req = req.validatedResult;
+
     const id = req.params.id
     recipeRepository.id(id)
     .then((ingredient) => {
@@ -18,10 +22,16 @@ const ingredientId = (req,res) => {
 }
 
 const post = (req, res) => {
+    req = req.validatedResult;
+    req = req.body  
 
-    recipeRepository.post(req)
-    .then(() => {
-        res.status(httpStatus.CREATED)
+
+    console.log(req)
+    ricetta = req.recipe
+    recipeRepository.post(ricetta)
+    .then((result) => {
+        res.status(httpStatus.CREATED).json(result)
+
         res.end()
     })
 }
