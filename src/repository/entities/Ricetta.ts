@@ -1,5 +1,5 @@
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from "typeorm"
-import { RicettaIngrediente } from "./RicettaIngredienti"
+import { RicettaIngrediente } from "./RicettaIngrediente"
 import { Tag } from "./Tag"
 
 @Entity()

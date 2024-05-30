@@ -16,7 +16,7 @@ const recipeRouter = require('./router/v1/recipe')
 server.use('/api/v1', recipeRouter)
 
 
-const PORT = 3001
+const PORT = 3000
 
 
 const AppDataSource = require("./repository/dbSource.ts").AppDataSource

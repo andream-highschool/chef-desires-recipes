@@ -2,11 +2,11 @@ import { DataSource } from "typeorm"
 
 export const AppDataSource = new DataSource({
     type: "mssql",
-    host: "localhost",
-    port: 5533,
+    host: "sql_server",
+    port: 1433,
     username: "sa",
     password: "1AAAaaa!",
-    database: "Test",
+    database: "Ricette",
     synchronize: true,
     logging: false,
     entities: [__dirname + "/entities/**/*.{js,ts}"],

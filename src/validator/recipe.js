@@ -18,9 +18,15 @@ const byId = {
 const post = {
     body: Joi.object().keys({
         recipe: Joi.object().keys({
-            nome: Joi.string()
+            nome: Joi.string(),
+            ingredienti: Joi.array().items({
+                id: Joi.number()
+            }),
+            tags: Joi.array().items({
+                id: Joi.number()
+            })
         })
-    })
+    }).options({allowUnknown: true})
 }
 
 module.exports = {

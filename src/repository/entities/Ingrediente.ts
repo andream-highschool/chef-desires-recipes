@@ -1,5 +1,5 @@
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, OneToMany } from "typeorm"
-import { RicettaIngrediente } from "./RicettaIngredienti"
+import { RicettaIngrediente } from "./RicettaIngrediente"
 import { Ricetta } from "./Ricetta"
 
 

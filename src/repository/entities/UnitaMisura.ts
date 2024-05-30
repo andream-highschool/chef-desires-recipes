@@ -8,6 +8,9 @@ export class UnitaMisura {
 
     @Column()
     public nome: string
+
+    @Column()
+    public simbolo: string
     
     @Column("decimal")
     public peso: number
