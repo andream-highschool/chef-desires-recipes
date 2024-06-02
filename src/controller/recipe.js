@@ -4,8 +4,7 @@ const recipeRepository = require('../repository/recipe')
 const list = (req, res) => {
     req = req.validatedResult;
     
-    const query = req.query
-    recipeRepository.list(query.limit, query.page)
+    recipeRepository.list(req)
     .then((recipes) => {
         res.status(httpStatus.OK).json({data: recipes})
     })
@@ -25,8 +24,6 @@ const post = (req, res) => {
     req = req.validatedResult;
     req = req.body  
 
-
-    console.log(req)
     ricetta = req.recipe
     recipeRepository.post(ricetta)
     .then((result) => {

@@ -7,9 +7,27 @@ import { UnitaMisura } from "./entities/UnitaMisura"
 require('dotenv').config({ path: __dirname + "/.env" })
 
 
-const list = async (limit, page, sortBy) => {
-    let rep = AppDataSource.getRepository("Ricetta")
-    return await rep.find()
+const list = async (req) => {
+    const repoTag = AppDataSource.getRepository("Tag")
+    const repoRicetta = AppDataSource.getRepository("Ricetta")
+
+
+    console.log(req)
+    let data = req.body
+    
+    if (Object.keys(data.filters).length === 0)
+    {
+        console.log("No filtri :)")
+        return await repoRicetta.find({take: data.paging.limit, skip: 20*(data.paging.page-1)})
+    }
+
+    let prompt = data.filters.prompt
+    let tags = data.filters.tags
+
+    
+
+
+    // return await rep.find()
 }
 
 const id = async (id) => {

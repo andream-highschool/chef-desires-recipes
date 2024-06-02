@@ -10,6 +10,7 @@ const recipeController = require('../../controller/recipe')
 // Gli "use" sono i middleware che hanno la precedenza, vengono fatti su tutti. 
 router.use((req, res, next) => {
     console.log(`Route called: ${req.method} - ${req.originalUrl}`)
+    console.log(req)
     next()
 })
 

@@ -3,9 +3,23 @@ const Joi = require('joi')
 
 const list = {
     query: Joi.object().keys({
-        sortBy: Joi.string(),
-        limit: Joi.number().integer().default(10),
-        page: Joi.number().integer().default(1),
+        
+    }).default({
+        limit: 20,
+        page: 1
+    }),
+    body: Joi.object().keys({
+        filters: Joi.object().keys({
+            prompt: Joi.string(),
+            tags: Joi.array().items(Joi.string())
+        }).default({}),
+        paging: Joi.object().keys({
+            limit: Joi.number().integer().default(20),
+            page: Joi.number().integer().default(1),
+        }).default({
+            limit: 20,
+            page: 1
+        })
     }),
 }
 
