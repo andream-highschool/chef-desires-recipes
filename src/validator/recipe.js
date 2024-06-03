@@ -1,25 +1,21 @@
 const Joi = require('joi')
 
-
 const list = {
     query: Joi.object().keys({
-        
-    }).default({
-        limit: 20,
-        page: 1
-    }),
-    body: Joi.object().keys({
         filters: Joi.object().keys({
-            prompt: Joi.string(),
+            prompt: Joi.string(), // stringa ricerca che l'utente ricette
             tags: Joi.array().items(Joi.string())
         }).default({}),
         paging: Joi.object().keys({
-            limit: Joi.number().integer().default(20),
-            page: Joi.number().integer().default(1),
+            limit: Joi.number().integer().max(20).min(1).default(20),
+            page: Joi.number().integer().min(1).default(1),
         }).default({
             limit: 20,
             page: 1
         })
+    }).default({
+        filters: { tags: [] },
+        paging: {limit: 20, page: 1}
     }),
 }
 

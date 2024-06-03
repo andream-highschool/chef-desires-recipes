@@ -13,12 +13,12 @@ const list = async (req) => {
 
 
     console.log(req)
-    let data = req.body
+    let data = req.query
     
     if (Object.keys(data.filters).length === 0)
     {
         console.log("No filtri :)")
-        return await repoRicetta.find({take: data.paging.limit, skip: 20*(data.paging.page-1)})
+        return await repoRicetta.find({take: data.paging.limit, skip: data.paging.limit*(data.paging.page-1)})
     }
 
     let prompt = data.filters.prompt
