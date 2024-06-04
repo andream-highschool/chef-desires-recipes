@@ -4,27 +4,55 @@ import { Ingrediente } from "./entities/Ingrediente"
 import { RicettaIngrediente } from "./entities/RicettaIngrediente"
 import { UnitaMisura } from "./entities/UnitaMisura"
 
+import {Like} from "typeorm";
+
 require('dotenv').config({ path: __dirname + "/.env" })
 
+const relations = ['ingredienti', 'ingredienti.ingrediente','ingredienti.unitaMisura','tags']
 
 const list = async (req) => {
     const repoTag = AppDataSource.getRepository("Tag")
     const repoRicetta = AppDataSource.getRepository("Ricetta")
-
+    const repoIngredienti = AppDataSource.getRepository("Ingrediente")
 
     console.log(req)
     let data = req.query
     
+    const output = []
+
     if (Object.keys(data.filters).length === 0)
     {
         console.log("No filtri :)")
-        return await repoRicetta.find({take: data.paging.limit, skip: data.paging.limit*(data.paging.page-1)})
+        let ricette = await repoRicetta.find({ 
+            relations: relations,
+            take: data.paging.limit, 
+            skip: data.paging.limit * (data.paging.page - 1) 
+        }) as Ricetta[]
+        
+        ricette.forEach((ricetta) => {
+            output.push({ricetta})
+        })
+
+        return output
     }
 
     let prompt = data.filters.prompt
     let tags = data.filters.tags
 
-    
+    let ricette = await repoRicetta.find({
+        where: {
+            nome: Like(`%${prompt}%`)
+        },
+        relations: relations,
+        take: data.paging.limit, 
+        skip: data.paging.limit * (data.paging.page - 1) 
+    })
+
+    ricette.forEach((ricetta) => {
+        output.push({ricetta})
+    })
+
+    return output
 
 
     // return await rep.find()
@@ -32,47 +60,11 @@ const list = async (req) => {
 
 const id = async (id) => {
     let rep = AppDataSource.getRepository("Ricetta")
-    return await rep.findOneBy({ id: id })
+    return await rep.findOne({ where:{id: id}, relations: relations })
 }
 
 const post = async (recipe) => {
-    // recipe = {
-    //     data: {
-    //         ricetta: {
-    //             nome: "Pasta al pomodoro",
-    //             ingredienti: [
-    //                 {
-    //                     id: 6,
-    //                     nome: "Pomodoro",
-    //                     quantita: 3,
-    //                     unitaMisura: {
-    //                         id: 1,
-    //                         UnitaMisura: "unità",
-    //                         peso: 1.0,
-    //                         simbolo: "unità"
-    //                     }
-    //                 },
-    //                 {
-    //                     id: 4,
-    //                     nome: "Pasta",
-    //                     quantita: 180,
-    //                     unitaMisura: {
-    //                         id: 2,
-    //                         UnitaMisura: "grammi",
-    //                         peso: 1.0,
-    //                         simbolo: "g"
-    //                     }
-    //                 }
-    //             ],
-    //             tags: [
-    //                 {
-    //                     id: 1,
-    //                     nome: "Halal"
-    //                 }
-    //             ]
-    //         }
-    //     }
-    // }
+
 
     console.log(recipe)
     

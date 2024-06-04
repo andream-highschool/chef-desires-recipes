@@ -28,7 +28,6 @@ const post = (req, res) => {
     recipeRepository.post(ricetta)
     .then((result) => {
         res.status(httpStatus.CREATED).json(result)
-
         res.end()
     })
 }

@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 
+
 export const AppDataSource = new DataSource({
     type: "mssql",
     host: "sql_server",
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
     entities: [__dirname + "/entities/**/*.{js,ts}"],
     migrations: [],
     subscribers: [],
-    options:{
+    options: {
         trustServerCertificate: true
-    }
+    },
 })
